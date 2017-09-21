@@ -1,5 +1,8 @@
 # MinesweeperGame
 
+Classic minesweeper game implementation using Angular 4 and Angular CLI.
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
 
 ## Development server
