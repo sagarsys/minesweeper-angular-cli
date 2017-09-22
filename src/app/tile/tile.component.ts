@@ -1,15 +1,20 @@
-// import {Component, OnInit} from '@angular/core';
-// import {TileService} from './tile.service';
-//
-// @Component({
-//   selector: 'app-tile',
-//   templateUrl: './tile.component',
-// })
-//
-// export class TileComponent implements OnInit {
-//   private isBomb;
-//   private isFlag;
-//   ngOnInit(): void {
-//     console.log('Init');
-//   }
-// }
+import {Component, Input} from '@angular/core';
+import {Tile} from './tile';
+
+@Component({
+  selector: 'app-tile',
+  template: `<div class="square"
+                  (click)="onTileClick($event, tile)"
+                  [ngClass]="{'is-bomb' : tile.isBomb, 'is-flag':tile.isFlag}">
+             </div>`,
+})
+
+export class TileComponent {
+  
+  @Input() tile: Tile;
+  
+  onTileClick($event, tile: Tile): void {
+    console.log($event);
+    console.log(tile);
+  }
+}

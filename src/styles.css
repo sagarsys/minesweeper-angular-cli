@@ -4,20 +4,30 @@ body {
 	background-color: #ccc;
 }
 
-app-gameboard {
+.gameboard {
 	margin: 30px auto;
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-start;
-	width: 200px;
-	height: 200px;
+	width: 400px;
+	height: 400px;
+}
+
+.gameboard-row {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .square {
 	display: block;
-	width: 20px;
-	height: 20px;
+	width: 40px;
+	height: 40px;
+	border: 1px solid #eee;
 	background-color: #333;
+}
+
+.square.is-clicked {
+	background-color: yellow;
 }
 
 .square.is-bomb {
