@@ -13,9 +13,6 @@ export class TileComponent {
   @Input() tile: Tile;
   
   onTileClick($event, tile: Tile): void {
-    console.log($event);
-    console.log(tile);
-    
     $event.target.classList.add('is-clicked');
     
     if (tile.isBomb) {
@@ -23,6 +20,6 @@ export class TileComponent {
     } else if (tile.isFlag) {
       $event.target.classList.add('is-flag');
     }
-    
   }
+  
 }
