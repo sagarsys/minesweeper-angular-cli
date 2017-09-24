@@ -6,14 +6,7 @@ import { Tile } from './tile';
 
 export class TileService {
   private counter = 0;
-  generateRandomTile(): Tile {
-    const tile = new Tile();
-    tile.id = this.counter;
-    tile.isBomb = (Math.floor(Math.random() * (1 + 1)) === 1);
-    tile.isFlag = !tile.isBomb || (Math.floor(Math.random() * (1 + 1)) === 0);
-    this.counter++;
-    return tile;
-  }
+
   generateTile(): Tile {
     const tile = new Tile();
     tile.id = this.counter;
@@ -22,18 +15,17 @@ export class TileService {
     this.counter++;
     return tile;
   }
-  generateBombTile(): Tile {
-    const tile = new Tile();
-    tile.id = this.counter;
-    tile.isBomb = true;
-    tile.isFlag = !tile.isBomb || (Math.floor(Math.random() * (1 + 1)) === 0);
+  
+  makeSpecialTile(type: string, tile: Tile): Tile {
+    switch (type) {
+      case 'bomb':
+        tile.isBomb = true;
+        break;
+      case 'flag':
+        tile.isFlag = true;
+        break;
+    }
     return tile;
   }
-  generateFlagTile(): Tile {
-    const tile = new Tile();
-    tile.id = this.counter;
-    tile.isFlag = true;
-    tile.isBomb = !tile.isFlag || (Math.floor(Math.random() * (1 + 1)) === 1);
-    return tile;
-  }
+  
 }
