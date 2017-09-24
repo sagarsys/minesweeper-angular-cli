@@ -1,5 +1,5 @@
-<div  class="gameboard" *ngFor="let tile of this.game; let i = index">
-	<div *ngIf="(i + 1) % 10 === 0" class="gameboard-row">
-		<app-tile [tile]="tile"></app-tile>
+<div  class="gameboard">
+	<div *ngFor="let row of this.game" class="gameboard-row">
+		<app-tile *ngFor="let tile of row" [tile]="tile"></app-tile>
 	</div>
 </div>

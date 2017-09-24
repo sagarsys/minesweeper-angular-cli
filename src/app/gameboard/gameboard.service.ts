@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import {Tile} from '../tile/tile';
 import {TileService} from '../tile/tile.service';
 import { Gameboard } from './gameboard';
 import {Game} from './game';
+import {GameArray} from './gameArray';
 
 @Injectable()
 
 export class GameboardService {
   
   public game: Game;
+  private gameArray: GameArray;
   private gameboard: Gameboard;
   private gameArrLength: number;
   private bombArray: number[];
@@ -19,14 +20,16 @@ export class GameboardService {
   
   init(difficulty = 'easy'): Game {
     this.gameboard = this.generateGameboard(difficulty);
-    this.game = this.generateGame(this.gameboard);
+    this.gameArray = this.generateGameArray(this.gameboard);
     this.gameArrLength = (this.gameboard.tilesX * this.gameboard.tilesY);
     
     this.bombArray = this.generateSpecialArray(this.gameboard.maxBombs, 0, this.gameArrLength);
     this.flagArray = this.generateSpecialArray(this.gameboard.maxFlags, 0, this.gameArrLength, this.bombArray);
     
-    this.generateSpecialTiles(this.game, this.bombArray, 'bomb');
-    this.generateSpecialTiles(this.game, this.flagArray, 'flag');
+    this.generateSpecialTiles(this.gameArray, this.bombArray, 'bomb');
+    this.generateSpecialTiles(this.gameArray, this.flagArray, 'flag');
+    
+    this.game = this.generateGame(this.gameArray);
     
     return this.game;
   }
@@ -52,24 +55,35 @@ export class GameboardService {
     return gameboard;
   }
   
-  private generateGame(gameboard: Gameboard): Game {
-    const game = new Game(),
+  private generateGameArray(gameboard: Gameboard): GameArray {
+    const gameArr = new GameArray(),
       arrLength = (gameboard.tilesX * gameboard.tilesY);
     
     for (let i = 0; i < arrLength; i++) {
       const tile = this.tileService.generateTile();
-      game.push(tile);
+      gameArr.push(tile);
     }
     
-    return game;
+    return gameArr;
   }
   
-  private generateSpecialTiles(game: Game, specialArr: number[], type: string): void {
+  private generateSpecialTiles(gameArr: GameArray, specialArr: number[], type: string): void {
     for (let i = 0; i < specialArr.length; i++) {
-      const tile = game[specialArr[i]];
+      const tile = gameArr[specialArr[i]];
       this.tileService.makeSpecialTile(type, tile);
     }
   }
+  
+  private generateGame(gameArr: GameArray): Game {
+    const game = new Game();
+    for (const i = 0; i < gameArr.length; i + 10) {
+      const splitArr = gameArr.splice(i, i + 10);
+      game.push(splitArr);
+    }
+    return game;
+    
+  }
+  
   /**
    * Returns a random array of integers of a given length between a start (inclusive) and an end (inclusive)
    */
