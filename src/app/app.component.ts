@@ -10,12 +10,16 @@ import {GameboardService} from './gameboard/gameboard.service';
   selector: 'app-root',
   template: `
     <app-gameboard></app-gameboard>
-    <app-statistics></app-statistics>
+    <app-statistics [maxBombs]="gameboard.maxBombs" [maxFlags]="gameboard.maxFlags" [numFlags]="numFlags"></app-statistics>
     <app-timer></app-timer>
   `,
   styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent {
-
+  gameboard = {
+    maxBombs: 15,
+    maxFlags: 10
+  };
+  numFlags = 0;
 }

@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Tile} from './tile';
+import {Subject} from 'rxjs/Subject';
 
 @Component({
   selector: 'app-tile',
@@ -12,6 +13,7 @@ import {Tile} from './tile';
 export class TileComponent {
   
   @Input() tile: Tile;
+  @Output() tileClick = new EventEmitter();
   
   onTileClick($event, tile: Tile): void {
     $event.target.classList.add('is-clicked');
@@ -21,6 +23,8 @@ export class TileComponent {
     } else if (tile.isFlag) {
       $event.target.classList.add('is-flag');
     }
+    
+    this.tileClick.emit(tile);
   }
   
 }

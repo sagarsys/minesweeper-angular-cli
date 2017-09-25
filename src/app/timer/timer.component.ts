@@ -17,4 +17,5 @@ export class TimerComponent implements OnInit {
   ngOnInit(): void {
     this.elapsedTime = 0;
   }
+  
 }

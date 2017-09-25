@@ -20,4 +20,8 @@ export class GameboardComponent implements OnInit {
     console.log(this.game);
   }
   
+  onTileClick($event) {
+    console.log('GB', $event);
+  }
+  
 }
