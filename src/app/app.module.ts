@@ -6,12 +6,16 @@ import { GameboardComponent } from './gameboard/gameboard.component';
 import {TileComponent} from './tile/tile.component';
 import {TileService} from './tile/tile.service';
 import {GameboardService} from './gameboard/gameboard.service';
+import {StatisticsComponent} from './statistics/statistics.component';
+import {TimerComponent} from './timer/timer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TileComponent,
     GameboardComponent,
-    TileComponent
+    StatisticsComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule

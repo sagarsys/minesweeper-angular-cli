@@ -3,38 +3,3 @@ html,
 body {
 	background-color: #ccc;
 }
-
-.gameboard {
-	margin: 30px auto;
-	display: flex;
-  flex-flow: row wrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	width: 420px;
-	height: 420px;
-}
-
-.gameboard-row {
-	display: flex;
-	flex-flow: row wrap;
-}
-
-.square {
-	display: block;
-	width: 40px;
-	height: 40px;
-	border: 1px solid #eee;
-	background-color: #333;
-}
-
-.square.is-clicked {
-	background-color: #ccc;
-}
-
-.square.is-bomb {
-	background-color: darkred;
-}
-
-.square.is-flag {
-	background-color: seagreen;
-}

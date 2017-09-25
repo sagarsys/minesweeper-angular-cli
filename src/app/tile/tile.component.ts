@@ -6,6 +6,7 @@ import {Tile} from './tile';
   template: `<div class="square"
                   (click)="onTileClick($event, tile)">
              </div>`,
+  styleUrls: ['./tile.component.scss']
 })
 
 export class TileComponent {

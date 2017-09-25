@@ -9,7 +9,11 @@ import {GameboardService} from './gameboard/gameboard.service';
 @Component({
   selector: 'app-root',
   template: `
-    <app-gameboard></app-gameboard>`
+    <app-gameboard></app-gameboard>
+    <app-statistics></app-statistics>
+    <app-timer></app-timer>
+  `,
+  styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent {

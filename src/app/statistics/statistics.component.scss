@@ -1,0 +1,13 @@
+.stats {
+	width: 420px;
+	margin: 30px auto;
+	display: flex;
+	justify-content: space-between;
+	p {
+		font-weight: bold;
+		span {
+			color: #333;
+			padding-left: 15px;
+		}
+	}
+}

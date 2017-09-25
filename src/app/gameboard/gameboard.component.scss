@@ -1,0 +1,14 @@
+.gameboard {
+	margin: 30px auto;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 420px;
+	height: 420px;
+}
+
+.gameboard-row {
+	display: flex;
+	flex-flow: row wrap;
+}

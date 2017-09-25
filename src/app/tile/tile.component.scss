@@ -1,0 +1,17 @@
+
+.square {
+	display: block;
+	width: 40px;
+	height: 40px;
+	border: 1px solid #eee;
+	background-color: #333;
+	&.is-clicked {
+		background-color: #ccc;
+	}
+	&.is-bomb {
+		background-color: darkred;
+	}
+	&.is-flag {
+		background-color: seagreen;
+	}
+}
