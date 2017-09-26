@@ -19,6 +19,4 @@ export class StatisticsComponent implements OnInit {
     this.numFlags = 0;
   }
   
-  
-  
 }

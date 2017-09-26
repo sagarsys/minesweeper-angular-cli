@@ -34,22 +34,28 @@ export class GameboardService {
     return this.game;
   }
   
+  public getGameboard(): Gameboard {
+    return this.gameboard;
+  }
+  
   private generateGameboard(difficulty): Gameboard {
     const gameboard = new Gameboard();
     switch (difficulty) {
       case 'easy':
         gameboard.tilesX = 10;
         gameboard.tilesY = 10;
-        gameboard.isGameOver = false;
         gameboard.maxBombs = 5;
         gameboard.maxFlags = 10;
+        gameboard.flagsFound = 0;
+        gameboard.isGameOver = false;
         break;
       case 'hard':
         gameboard.tilesX = 10;
         gameboard.tilesY = 10;
-        gameboard.isGameOver = false;
         gameboard.maxBombs = 15;
         gameboard.maxFlags = 1;
+        gameboard.flagsFound = 0;
+        gameboard.isGameOver = false;
         break;
     }
     return gameboard;
@@ -76,8 +82,8 @@ export class GameboardService {
   
   private generateGame(gameArr: GameArray): Game {
     const game = new Game();
-    for (const i = 0; i < gameArr.length; i + 10) {
-      const splitArr = gameArr.splice(i, i + 10);
+    for (const i = 0; i < gameArr.length; i + this.gameboard.tilesY) {
+      const splitArr = gameArr.splice(i, i + this.gameboard.tilesY);
       game.push(splitArr);
     }
     return game;

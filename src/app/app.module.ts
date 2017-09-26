@@ -8,6 +8,7 @@ import {TileService} from './tile/tile.service';
 import {GameboardService} from './gameboard/gameboard.service';
 import {StatisticsComponent} from './statistics/statistics.component';
 import {TimerComponent} from './timer/timer.component';
+import { GameoverComponent } from './gameover/gameover.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {TimerComponent} from './timer/timer.component';
     TileComponent,
     GameboardComponent,
     StatisticsComponent,
-    TimerComponent
+    TimerComponent,
+    GameoverComponent
   ],
   imports: [
     BrowserModule

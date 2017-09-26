@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Tile } from '../tile/tile';
 import { Game } from './game';
@@ -10,15 +10,9 @@ import { GameboardService } from './gameboard.service';
   styleUrls: ['./gameboard.component.scss']
 })
 
-export class GameboardComponent implements OnInit {
+export class GameboardComponent {
   
-  game: Game;
-  constructor(private gameboardService: GameboardService) {}
-  
-  ngOnInit(): void {
-    this.game = this.gameboardService.init();
-    console.log(this.game);
-  }
+  @Input() game: Game;
   
   onTileClick($event) {
     console.log('GB', $event);
