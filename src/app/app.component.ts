@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GameboardComponent } from './gameboard/gameboard.component';
-import {TileComponent} from './tile/tile.component';
-import {TileService} from './tile/tile.service';
-import {GameboardService} from './gameboard/gameboard.service';
-import { Game } from './gameboard/game';
+import { Game } from './game/game';
 import { Gameboard } from './gameboard/gameboard';
+import {GameService} from './game/game.service';
+import { TimerService } from './timer/timer.service';
 
 
 @Component({
@@ -32,11 +30,11 @@ export class AppComponent implements OnInit {
   game: Game;
   gameboard: Gameboard;
   
-  constructor(private gameboardService: GameboardService) {}
+  constructor(private gameService: GameService, private timerService: TimerService) {}
   
   ngOnInit(): void {
-    this.game = this.gameboardService.init();
-    this.gameboard = this.gameboardService.getGameboard();
+    this.game = this.gameService.init();
+    this.gameboard = this.gameService.getGameboard();
   }
   
 }

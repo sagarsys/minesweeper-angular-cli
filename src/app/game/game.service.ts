@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import {TileService} from '../tile/tile.service';
-import { Gameboard } from './gameboard';
-import {Game} from './game';
-import {GameArray} from './gameArray';
+import { TileService } from '../tile/tile.service';
+import { Gameboard } from '../gameboard/gameboard';
+import { Game } from './game';
+import { GameArray } from './gameArray';
 
 @Injectable()
-
-export class GameboardService {
+export class GameService {
   
   public game: Game;
   private gameArray: GameArray;
@@ -25,7 +24,6 @@ export class GameboardService {
     
     this.bombArray = this.generateSpecialArray(this.gameboard.maxBombs, 0, this.gameArrLength);
     this.flagArray = this.generateSpecialArray(this.gameboard.maxFlags, 0, this.gameArrLength, this.bombArray);
-    
     this.generateSpecialTiles(this.gameArray, this.bombArray, 'bomb');
     this.generateSpecialTiles(this.gameArray, this.flagArray, 'flag');
     

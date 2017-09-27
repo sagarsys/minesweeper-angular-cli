@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/takeWhile';
+import 'rxjs/add/operator/takeUntil';
+import {Observer} from 'rxjs/Observer';
+import {Subject} from 'rxjs/Subject';
+import {TimerService} from './timer.service';
 
 @Component({
   selector: 'app-timer',
@@ -12,20 +19,21 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 
 export class TimerComponent implements OnInit {
   
-  @Input() elapsedTime: number;
-  private gameTick;
+  elapsedTime: number;
+  timer$;
+  
+  constructor(private timerService: TimerService) {}
   
   ngOnInit(): void {
-    this.initTime();
-    this.timerTick();
-  }
-  initTime() {
-    clearInterval(this.gameTick);
+    this.timer$ = this.timerService.getTimer$();
+    const observer: Observer<any> = {
+      next: (value) => this.elapsedTime = value,
+      error: (err) => console.log(err),
+      complete: () => this.elapsedTime
+    };
+    this.elapsedTime = this.timer$.subscribe(observer);
     this.elapsedTime = 0;
-  }
-  
-  timerTick() {
-    this.gameTick = window.setInterval(() => this.elapsedTime++, 1000);
+    setTimeout(() => this.timer$.complete(), 20000);
   }
   
 }

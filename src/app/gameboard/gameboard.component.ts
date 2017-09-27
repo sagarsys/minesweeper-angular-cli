@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Tile } from '../tile/tile';
-import { Game } from './game';
-import { GameboardService } from './gameboard.service';
+import { Game } from '../game/game';
 
 @Component({
   selector: 'app-gameboard',
