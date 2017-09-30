@@ -11,16 +11,16 @@ import { TimerService } from './timer/timer.service';
   template: `
     <app-gameboard [game]="this.game"></app-gameboard>
     <app-statistics
-        [maxBombs]="this.gameboard.maxBombs"
-        [maxFlags]="this.gameboard.maxFlags"
-        [numFlags]="this.gameboard.flagsFound">
+      [maxBombs]="this.gameboard.maxMines"
+      [maxFlags]="this.gameboard.maxFlags"
+      [numFlags]="this.gameboard.flagsFound">
     </app-statistics>
     <app-timer></app-timer>
     <app-gameover
-        [maxFlags]="this.gameboard.maxFlags"
-        [flagsFound]="this.gameboard.flagsFound"
-        [isGameOver]="this.gameboard.isGameOver"
-        [playTime]="0">
+      [maxFlags]="this.gameboard.maxFlags"
+      [flagsFound]="this.gameboard.flagsFound"
+      [isGameOver]="this.gameboard.isGameOver"
+      [playTime]="0">
     </app-gameover>
   `,
   styleUrls: ['./app.component.scss']

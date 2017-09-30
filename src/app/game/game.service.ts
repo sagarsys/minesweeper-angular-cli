@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { TileService } from '../tile/tile.service';
+import { CellService } from '../cell/cell.service';
 import { Gameboard } from '../gameboard/gameboard';
 import { Game } from './game';
 import { GameArray } from './gameArray';
@@ -12,20 +12,20 @@ export class GameService {
   private gameArray: GameArray;
   private gameboard: Gameboard;
   private gameArrLength: number;
-  private bombArray: number[];
+  private mineArray: number[];
   private flagArray: number[];
   
-  constructor(private tileService: TileService) {}
+  constructor(private cellService: CellService) {}
   
   init(difficulty = 'easy'): Game {
     this.gameboard = this.generateGameboard(difficulty);
     this.gameArray = this.generateGameArray(this.gameboard);
-    this.gameArrLength = (this.gameboard.tilesX * this.gameboard.tilesY);
+    this.gameArrLength = (this.gameboard.numOfCols * this.gameboard.numOfRows);
     
-    this.bombArray = this.generateSpecialArray(this.gameboard.maxBombs, 0, this.gameArrLength);
-    this.flagArray = this.generateSpecialArray(this.gameboard.maxFlags, 0, this.gameArrLength, this.bombArray);
-    this.generateSpecialTiles(this.gameArray, this.bombArray, 'bomb');
-    this.generateSpecialTiles(this.gameArray, this.flagArray, 'flag');
+    this.mineArray = this.generateSpecialArray(this.gameboard.maxMines, 0, this.gameArrLength);
+    this.flagArray = this.generateSpecialArray(this.gameboard.maxFlags, 0, this.gameArrLength, this.mineArray);
+    this.generateSpecialCells(this.gameArray, this.mineArray, 'mine');
+    this.generateSpecialCells(this.gameArray, this.flagArray, 'flag');
     
     this.game = this.generateGame(this.gameArray);
     
@@ -40,17 +40,17 @@ export class GameService {
     const gameboard = new Gameboard();
     switch (difficulty) {
       case 'easy':
-        gameboard.tilesX = 10;
-        gameboard.tilesY = 10;
-        gameboard.maxBombs = 5;
+        gameboard.numOfCols = 10;
+        gameboard.numOfRows = 10;
+        gameboard.maxMines = 5;
         gameboard.maxFlags = 10;
         gameboard.flagsFound = 0;
         gameboard.isGameOver = false;
         break;
       case 'hard':
-        gameboard.tilesX = 10;
-        gameboard.tilesY = 10;
-        gameboard.maxBombs = 15;
+        gameboard.numOfCols = 10;
+        gameboard.numOfRows = 10;
+        gameboard.maxMines = 15;
         gameboard.maxFlags = 1;
         gameboard.flagsFound = 0;
         gameboard.isGameOver = false;
@@ -61,28 +61,32 @@ export class GameService {
   
   private generateGameArray(gameboard: Gameboard): GameArray {
     const gameArr = new GameArray(),
-      arrLength = (gameboard.tilesX * gameboard.tilesY);
+      arrLength = (gameboard.numOfCols * gameboard.numOfRows);
     
     for (let i = 0; i < arrLength; i++) {
-      const tile = this.tileService.generateTile();
-      gameArr.push(tile);
+      const cell = this.cellService.generateCell();
+      
+      gameArr.push(cell);
     }
     
     return gameArr;
   }
   
-  private generateSpecialTiles(gameArr: GameArray, specialArr: number[], type: string): void {
+  private generateSpecialCells(gameArr: GameArray, specialArr: number[], type: string): void {
     for (let i = 0; i < specialArr.length; i++) {
-      const tile = gameArr[specialArr[i]];
-      this.tileService.makeSpecialTile(type, tile);
+      const cell = gameArr[specialArr[i]];
+      this.cellService.makeSpecialCell(type, cell);
     }
   }
   
   private generateGame(gameArr: GameArray): Game {
     const game = new Game();
-    for (const i = 0; i < gameArr.length; i + this.gameboard.tilesY) {
-      const splitArr = gameArr.splice(i, i + this.gameboard.tilesY);
+    let y = 0;
+    for (const i = 0; i < gameArr.length; i + this.gameboard.numOfRows) {
+      const splitArr = gameArr.splice(i, i + this.gameboard.numOfRows);
+      splitArr.map((cell, x) => this.cellService.updateCellCoordinates(cell, x, y));
       game.push(splitArr);
+      y++;
     }
     return game;
     

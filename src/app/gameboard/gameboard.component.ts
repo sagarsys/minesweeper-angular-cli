@@ -12,7 +12,7 @@ export class GameboardComponent {
   
   @Input() game: Game;
   
-  onTileClick($event) {
+  onCellClick($event) {
     console.log('GB', $event);
   }
   

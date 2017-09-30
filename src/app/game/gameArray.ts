@@ -1,5 +1,5 @@
-import { Tile } from '../tile/tile';
+import { Cell } from '../cell/cell';
 
 export class GameArray extends Array {
-  gameArray: Tile[];
+  gameArray: Cell[];
 }

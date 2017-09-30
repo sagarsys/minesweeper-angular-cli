@@ -1,7 +1,7 @@
 export class Gameboard {
-  tilesX: number;
-  tilesY: number;
-  maxBombs: number;
+  numOfCols: number;
+  numOfRows: number;
+  maxMines: number;
   maxFlags: number;
   flagsFound: number;
   isGameOver: boolean;

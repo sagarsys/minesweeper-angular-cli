@@ -1,5 +1,3 @@
-
-
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -32,7 +30,7 @@ export class GameoverComponent implements OnInit {
   getGameOverMessage(): string {
     let message: string;
     if (this.flagsFound === this.maxFlags) {
-      message = `You win! You found all ${this.maxFlags} flags without hitting a bomb!`;
+      message = `You win! You found all ${this.maxFlags} flags without hitting a mine!`;
     } else {
       message = `You lose! You found ${this.flagsFound} out of ${this.maxFlags} flags!`;
     }

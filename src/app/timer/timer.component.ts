@@ -33,7 +33,7 @@ export class TimerComponent implements OnInit {
     };
     this.elapsedTime = this.timer$.subscribe(observer);
     this.elapsedTime = 0;
-    setTimeout(() => this.timer$.complete(), 20000);
+    // setTimeout(() => this.timer$.complete(), 20000);
   }
   
 }

@@ -2,19 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { TileComponent } from './tile/tile.component';
+import { CellComponent } from './cell/cell.component';
 import { GameboardComponent } from './gameboard/gameboard.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { TimerComponent } from './timer/timer.component';
 import { GameoverComponent } from './gameover/gameover.component';
-import { TileService } from './tile/tile.service';
+import { CellService } from './cell/cell.service';
 import { GameService} from './game/game.service';
 import { TimerService } from './timer/timer.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TileComponent,
+    CellComponent,
     GameboardComponent,
     StatisticsComponent,
     TimerComponent,
@@ -23,7 +23,7 @@ import { TimerService } from './timer/timer.service';
   imports: [
     BrowserModule
   ],
-  providers: [TileService, GameService, TimerService],
+  providers: [CellService, GameService, TimerService],
   bootstrap: [
     AppComponent
   ]
