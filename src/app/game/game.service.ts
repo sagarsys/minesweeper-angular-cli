@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+import { Cell } from '../cell/cell';
 import { CellService } from '../cell/cell.service';
 import { Gameboard } from '../gameboard/gameboard';
 import { Game } from './game';
@@ -34,6 +35,24 @@ export class GameService {
   
   public getGameboard(): Gameboard {
     return this.gameboard;
+  }
+  
+  public checkForNearMines(game: Game, gameboard: Gameboard, cell: Cell): number {
+    const nearMines: Cell[] = [],
+      x = cell.coordinates.x,
+      y = cell.coordinates.y,
+      xNearArr = [ x - 1, x, x + 1 ],
+      yNearArr = [ y - 1, y, y + 1 ];
+    
+    for (let i = 0; i < xNearArr.length; i++) {
+      for (let j = 0; j < yNearArr.length; j++) {
+        const currentCell = game[i][j];
+        if (currentCell.isMine && currentCell !== cell) {
+          nearMines.push(currentCell);
+        }
+      }
+    }
+    return nearMines.length;
   }
   
   private generateGameboard(difficulty): Gameboard {

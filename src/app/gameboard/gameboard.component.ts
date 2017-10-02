@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { Game } from '../game/game';
+import { GameService } from '../game/game.service';
 
 @Component({
   selector: 'app-gameboard',
@@ -12,8 +13,12 @@ export class GameboardComponent {
   
   @Input() game: Game;
   
-  onCellClick($event) {
-    console.log('GB', $event);
+  constructor(private gameService: GameService) {}
+  
+  onCellClick(cell) {
+    console.log('GB', cell);
+    // this.gameService.checkForNearMines(cell);
+  
   }
   
 }
